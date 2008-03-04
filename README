@@ -1,13 +1,17 @@
 RspecNestedScaffold
 ===================
 
-Introduction goes here.
+This plugin will generate a fully spec-ed nested resource scaffold.
 
 
 Example
 =======
 
-Example goes here.
+./script/generate rspec_nested_scaffold --owner=User Entry body:text
 
 
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+TODO
+====
+[ ] generate the appropriate nested route
+
+Copyright (c) 2008 Jeremy Friesen, released under the MIT license
