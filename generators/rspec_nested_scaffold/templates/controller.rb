@@ -13,7 +13,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # GET /<%=nesting_owner.pluralize%>/:<%=nesting_owner%>_id/<%= table_name %>.xml
   def index
     @<%= table_name %> = <%= nesting_owner %>.<%= table_name %>.find(:all)
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @<%= table_name %> }
@@ -55,7 +55,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     respond_to do |format|
       if @<%= file_name %>.save
         flash[:notice] = '<%= class_name %> was successfully created.'
-        format.html { redirect_to(<%= nesting_owner %>_<%= table_name %>_path(<%= nesting_owner %>) }
+        format.html { redirect_to(<%= nesting_owner %>_<%= file_name %>_url(<%= nesting_owner %>, @<%= file_name %>)) }
         format.xml  { render :xml => @<%= file_name %>, :status => :created, :location => <%= nesting_owner %>_<%= file_name %>_path(<%= nesting_owner %>, @<%= file_name %>) }
       else
         format.html { render :action => "new" }
@@ -72,7 +72,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     respond_to do |format|
       if @<%= file_name %>.update_attributes(params[:<%= file_name %>])
         flash[:notice] = '<%= class_name %> was successfully updated.'
-        format.html { <%= nesting_owner %>_<%= file_name %>_path(<%= nesting_owner %>, @<%= file_name %>) }
+        format.html { redirect_to(<%= nesting_owner %>_<%= file_name %>_url(<%= nesting_owner %>, @<%= file_name %>)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

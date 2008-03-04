@@ -5,10 +5,11 @@ describe "/<%= table_name %>/show.<%= default_file_extension %>" do
   
   before(:each) do
     @<%= file_name %> = mock_model(<%= class_name %>)
+    @<%= nesting_owner %> = mock_model(<%= nesting_owner_class %>)
 <% for attribute in attributes -%>
     @<%= file_name %>.stub!(:<%= attribute.name %>).and_return(<%= attribute.default_value %>)
 <% end -%>
-
+    assigns[:<%= nesting_owner %>] = @<%= nesting_owner %>    
     assigns[:<%= file_name %>] = @<%= file_name %>
   end
 

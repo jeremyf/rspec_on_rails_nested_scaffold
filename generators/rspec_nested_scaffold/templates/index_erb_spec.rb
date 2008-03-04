@@ -9,7 +9,9 @@ describe "/<%= table_name %>/index.<%= default_file_extension %>" do
 <% for attribute in attributes -%>
     <%= file_name %>_<%= id %>.should_receive(:<%= attribute.name %>).and_return(<%= attribute.default_value %>)
 <% end -%><% end %>
+    @<%= nesting_owner %> = mock_model(<%= nesting_owner_class %>)
     assigns[:<%= table_name %>] = [<%= file_name %>_98, <%= file_name %>_99]
+    assigns[:<%= nesting_owner %>] = @<%= nesting_owner %>
   end
 
   it "should render list of <%= table_name %>" do
