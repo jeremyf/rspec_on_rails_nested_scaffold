@@ -1,13 +1,16 @@
 require File.dirname(__FILE__) + '<%= '/..' * class_nesting_depth %>/../spec_helper'
 
 describe <%= controller_class_name %>Controller do
-  describe "handling GET /<%= table_name %>" do
+  before(:each) do
+    @<%= file_name %> = mock_model(<%= class_name %>)
+    @<%= nesting_owner %> = mock_model(<%= nesting_owner_class %>, :<%= table_name %> => 'Association')
+    <%= nesting_owner_class %>.expects(:find).with(@<%= nesting_owner %>.id).returns(@<%= nesting_owner %>)
+  end
 
+  describe "handling GET /<%=nesting_owner.pluralize%>/:<%=nesting_owner%>_id/<%= table_name %>" do
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>)
-      <%= class_name %>.stub!(:find).and_return([@<%= file_name %>])
+      @<%= nesting_owner %>.<%= table_name %>.stubs(:find).returns([@<%= file_name %>])
     end
-  
     def do_get
       get :index
     end
@@ -17,13 +20,18 @@ describe <%= controller_class_name %>Controller do
       response.should be_success
     end
 
+    it "should assign the found <%= nesting_owner %> for the view" do
+      do_get
+      assigns[:<%= nesting_owner%>].should == @<%= nesting_owner %>
+    end
+
     it "should render index template" do
       do_get
       response.should render_template('index')
     end
   
-    it "should find all <%= table_name %>" do
-      <%= class_name %>.should_receive(:find).with(:all).and_return([@<%= file_name %>])
+    it "should find all <%= table_name %> owned by <%= nesting_owner %>" do
+      @<%= nesting_owner %>.<%= table_name %>.expects(:find).returns([@<%= file_name %>])
       do_get
     end
   

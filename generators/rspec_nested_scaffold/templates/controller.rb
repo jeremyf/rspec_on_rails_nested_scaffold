@@ -9,11 +9,11 @@ class <%= controller_class_name %>Controller < ApplicationController
   
   public
   
-  # GET /<%= table_name %>
-  # GET /<%= table_name %>.xml
+  # GET /<%=nesting_owner.pluralize%>/:<%=nesting_owner%>_id/<%= table_name %>
+  # GET /<%=nesting_owner.pluralize%>/:<%=nesting_owner%>_id/<%= table_name %>.xml
   def index
     @<%= table_name %> = <%= nesting_owner %>.<%= table_name %>.find(:all)
-
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @<%= table_name %> }

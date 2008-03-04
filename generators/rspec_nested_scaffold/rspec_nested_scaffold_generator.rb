@@ -63,8 +63,8 @@ class RspecNestedScaffoldGenerator < Rails::Generator::NamedBase
       #jnf# m.template 'rspec_scaffold:routing_spec.rb',
       #jnf#   File.join('spec/controllers', controller_class_path, "#{controller_file_name}_routing_spec.rb")
       #jnf# 
-      #jnf# m.template 'rspec_scaffold:controller_spec.rb',
-      #jnf#   File.join('spec/controllers', controller_class_path, "#{controller_file_name}_controller_spec.rb")
+      m.template 'rspec_nested_scaffold:controller_spec.rb',
+        File.join('spec/controllers', controller_class_path, "#{controller_file_name}_controller_spec.rb")
 
       m.template "rspec_nested_scaffold:controller.rb",
         File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb")
