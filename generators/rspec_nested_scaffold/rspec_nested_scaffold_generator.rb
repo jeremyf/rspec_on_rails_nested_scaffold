@@ -16,9 +16,10 @@ class RspecNestedScaffoldGenerator < Rails::Generator::NamedBase
   alias_method  :controller_table_name, :controller_plural_name
 
   def initialize(runtime_args, runtime_options = {})
-    raise "./script/generate rspec_nested_scaffold ResourceName nesting_owner nesting_owner_id:integer..." unless runtime_args.size >= 3
-    @nesting_owner = runtime_args.slice!(1)
     super
+    raise "For #{$0} #{File.basename(__FILE__, '.rb')} you must specify the --owner option.  See --help" unless runtime_options[:owner]
+    
+    @nesting_owner = runtime_options[:owner].underscore.singularize
 
     @controller_name = @name.pluralize
 
@@ -91,17 +92,17 @@ class RspecNestedScaffoldGenerator < Rails::Generator::NamedBase
       m.template 'rspec_model:model_spec.rb',       File.join('spec/models', class_path, "#{file_name}_spec.rb")
 
       # View specs
-      #jnf#
-      #jnf# unless options[:skip_migration]
-      #jnf#   m.migration_template(
-      #jnf#     'model:migration.rb', 'db/migrate',
-      #jnf#     :assigns => {
-      #jnf#       :migration_name => "Create#{class_name.pluralize.gsub(/::/, '')}",
-      #jnf#       :attributes     => attributes
-      #jnf#     },
-      #jnf#     :migration_file_name => "create_#{file_path.gsub(/\//, '_').pluralize}"
-      #jnf#   )
-      #jnf# end
+      
+      unless options[:skip_migration]
+        m.migration_template(
+          'model:migration.rb', 'db/migrate',
+          :assigns => {
+            :migration_name => "Create#{class_name.pluralize.gsub(/::/, '')}",
+            :attributes     => attributes
+          },
+          :migration_file_name => "create_#{file_path.gsub(/\//, '_').pluralize}"
+        )
+      end
 
       m.route_resources controller_file_name
 
@@ -112,7 +113,7 @@ class RspecNestedScaffoldGenerator < Rails::Generator::NamedBase
 
   # Override with your own usage banner.
   def banner
-    "Usage: #{$0} rspec_scaffold ModelName nesting_owner field:type field:type"
+    "Usage: #{$0} #{File.basename(__FILE__, '.rb')} ModelName --owner=OwnerName field:type field:type"
   end
 
   def add_options!(opt)
@@ -120,6 +121,7 @@ class RspecNestedScaffoldGenerator < Rails::Generator::NamedBase
     opt.separator 'Options:'
     opt.on("--skip-migration",
     "Don't generate a migration file for this model") { |v| options[:skip_migration] = v }
+    opt.on("--owner=owner", '-o', 'Nested resource owner') { |v| options[:owner] = v }
   end
 
   def scaffold_views
