@@ -17,9 +17,9 @@ class RspecNestedScaffoldGenerator < Rails::Generator::NamedBase
 
   def initialize(runtime_args, runtime_options = {})
     super
-    raise "For #{$0} #{File.basename(__FILE__, '.rb')} you must specify the --owner option.  See --help" unless runtime_options[:owner]
+    raise "For #{$0} #{File.basename(__FILE__, '.rb')} you must specify the --owner option.  See --help" unless options[:owner]
     
-    @nesting_owner = runtime_options[:owner].underscore.singularize
+    @nesting_owner = options[:owner].underscore.singularize
 
     @controller_name = @name.pluralize
 

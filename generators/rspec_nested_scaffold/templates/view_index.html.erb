@@ -12,9 +12,9 @@
 <% for attribute in attributes -%>
     <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
 <% end -%>
-    <td><%%= link_to 'Show', <%= nesting_owner %>_<%= singular_name %>_path(@<%= nesting_owner %>, @<%= singular_name %>) %></td>
-    <td><%%= link_to 'Edit', edit_<%= nesting_owner %>_<%= singular_name %>_path(@<%= nesting_owner %>, @<%= singular_name %>) %></td>
-    <td><%%= link_to 'Destroy', <%= nesting_owner %>_<%= singular_name %>_path(@<%= nesting_owner %>, @<%= singular_name %>), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%%= link_to 'Show', <%= nesting_owner %>_<%= singular_name %>_path(@<%= nesting_owner %>, <%= singular_name %>) %></td>
+    <td><%%= link_to 'Edit', edit_<%= nesting_owner %>_<%= singular_name %>_path(@<%= nesting_owner %>, <%= singular_name %>) %></td>
+    <td><%%= link_to 'Destroy', <%= nesting_owner %>_<%= singular_name %>_path(@<%= nesting_owner %>, <%= singular_name %>), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <%% end %>
 </table>
