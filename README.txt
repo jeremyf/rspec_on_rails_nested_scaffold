@@ -1,3 +1,34 @@
+= rspec_on_rails_nested_scaffold
+
+Plugin version:
+  
+* http://github.com/jeremyf/rspec_on_rails_nested_scaffold/tree/master
+
+Gem version:
+  
+* http://github.com/jeremyf/rspec_on_rails_nested_scaffold/tree/master
+
+== DESCRIPTION:
+
+This gem provides a rails generator for fully spec-ed nested resource scaffold.
+
+== FEATURES/PROBLEMS:
+
+Instead of boring one-model scaffold in rails, this generator
+creates a scaffold for a model that belongs to another model.
+
+== REQUIREMENTS:
+
+* Rails 2.0+ applications only
+
+== INSTALL:
+
+* gem install rspec_on_rails_nested_scaffold
+
+== LICENSE:
+
+(The MIT License)
+
 Copyright (c) 2008 Jeremy Friesen
 
 Permission is hereby granted, free of charge, to any person obtaining
