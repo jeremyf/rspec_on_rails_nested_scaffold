@@ -1,7 +1,5 @@
 
-For more information on rspec_on_rails_nested_scaffold, see http://rspec_on_rails_nested_scaffold.rubyforge.org
 
-NOTE: Change this information in PostInstall.txt 
-You can also delete it if you don't want it.
+USAGE: ./script/generate rspec_nested_scaffold --owner=User Entry body:text
 
 

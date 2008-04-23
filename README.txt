@@ -8,6 +8,11 @@ Gem version:
   
 * http://github.com/jeremyf/rspec_on_rails_nested_scaffold/tree/master
 
+
+== USAGE
+
+./script/generate rspec_nested_scaffold --owner=User Entry body:text
+
 == DESCRIPTION:
 
 This gem provides a rails generator for fully spec-ed nested resource scaffold.
